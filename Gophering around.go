@@ -5,8 +5,11 @@ import (
 	"strings"
 )
 
+const welcome = "Welcome to Go!"
+const shout = "Shout it from the roof tops"
+
 func main() {
-	fmt.Println("Welcome to Go!")
-	fmt.Println(strings.ToUpper("Shout it from the roof tops"))
+	fmt.Println(welcome)
+	fmt.Println(strings.ToUpper(shout))
 
 }

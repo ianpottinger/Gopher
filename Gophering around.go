@@ -15,12 +15,34 @@ const goInstall string = "go install github.com/ianpottinger/Gopher"
 
 // comments
 var number int = 42
+var backtick rune = '`'
 var decimal float32 = (float32(number / 10))
 var fourtyTwo string = (strconv.Itoa(number))
 var camelCase = "camel case is used for variables"
 var state bool = true
 var debug bool = false
 
+// comments
+var ubyt8x1 uint8 = 255
+var ubyt8x2 uint16 = 65535
+var ubyt8x4 uint32 = 4294967295
+var ubyt8x8 uint64 = 18446744073709551615
+
+// comments
+var sbyt8x1 int8 = -127
+var sbyt8x2 int16 = -32767
+var sbyt8x4 int32 = -2147483647
+var sbyt8x8 int64 = -9223372036854775807
+
+// var pointer uintptr = *ubyt84
+
+var ieee75432 float32 = 0.0
+var ieee75464 float64 = 0.0
+
+var dfloat32 complex64 = 32.32
+var dfloat64 complex128 = 64.64
+
+// comments
 type CaseType struct {
 	//struct, not class for case types
 	text string

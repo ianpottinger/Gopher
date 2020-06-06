@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const purpose string = "Strong statically typed, easy concurrent friendly, garbaage collected language, with fast compilation."
+const purpose string = "Strong statically typed, easy concurrency friendly, garbaage collected language, with fast compilation."
 const welcome string = "Ready, Steady, Welcome to Pascal 2.0 Go! Stop Gophering around."
 const terminal string = "Ctrl - `"
 const goRun string = "go run github.com/ianpottinger/Gopher"
@@ -47,21 +47,44 @@ var not bool = !false
 var or bool = true || false
 var and bool = true && true
 
-/*
-struct element {
-	key   int
-	value string
+type Element struct {
+	row    int
+	column int
+	value  int
 }
-var fixedArray [5]element
-*/
+
+var fixedArray [5]Element
 
 var element int = 0
 var array1D [3]int = [3]int{1, 5, 9}
 
-// comments
+// Comments
 type CaseType struct {
 	//struct, not class for case types
-	text string
+	text   string
+	number int
+}
+
+// Key Value Pair
+type KeyValue struct {
+	key   string
+	value string
+}
+
+func (keyValuePair KeyValue) getKey() string {
+	return keyValuePair.key
+}
+
+func (keyValuePair KeyValue) getValue() string {
+	return keyValuePair.value
+}
+
+func (keyValuePair *KeyValue) setKey(key string) {
+	keyValuePair.key = key
+}
+
+func (keyValuePair *KeyValue) setValue(value string) {
+	keyValuePair.value = value
 }
 
 var (
@@ -69,8 +92,16 @@ var (
 )
 
 var numbers = [...]int{1, 2, 3}
-var pointers = &numbers
+var pointer = &numbers
 var slice = []string{"Ready", "Steady", "Go!"}
+
+func isOdd(numeral int) bool {
+	return numeral%2 == 1
+}
+
+func isEven(numeral int) bool {
+	return numeral%2 == 0
+}
 
 func main() {
 	logical := debug == state
@@ -154,5 +185,49 @@ func main() {
 
 	fmt.Println(numbers)
 	fmt.Println(array1D)
+
+	var evens map[string]int = map[string]int{
+		"zero":  0,
+		"two":   2,
+		"four":  4,
+		"six":   6,
+		"eight": 8,
+	}
+	fmt.Println(evens)
+	fmt.Println(evens["four"])
+	delete(evens, "four")
+	even, present := evens["four"]
+	fmt.Println(evens, even, present)
+	if !present && isEven(4) {
+		evens["four"] = 4
+	}
+	fmt.Println(evens)
+
+	var odds map[int]string = map[int]string{
+		1: "one",
+		3: "three",
+		5: "five",
+		7: "seven",
+		9: "nine",
+	}
+	fmt.Println(odds)
+	fmt.Println(odds[5])
+	delete(odds, 5)
+	odd, present := odds[5]
+	fmt.Println(odds, odd, present)
+	if !present && isOdd(5) {
+		odds[5] = "five"
+	}
+	fmt.Println(odds)
+
+	fmt.Println(&pointer)
+
+	kv := KeyValue{"The Key", "The Value"}
+	fmt.Printf("\nPointer %v to %v and %v", &kv, kv.key, kv.value)
+	fmt.Printf("\nPointer %t to %t and %t", &kv, kv.key, kv.value)
+	kv.setKey("New Key")
+	kv.setValue("New Value")
+	fmt.Printf("\nPointer %v to %v and %v", &kv, kv.getKey(), kv.getValue())
+	fmt.Printf("\nPointer %t to %t and %t", &kv, kv.getKey(), kv.getValue())
 
 }
